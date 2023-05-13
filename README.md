@@ -35,3 +35,19 @@
         figures
     }
 ```
+
+#### Modules - 자바스크립트 모듈화 방법
+- 호출되기 전까지는 코드 실행과 동작을 하지 않는 특징
+- 왜쓰냐? -> 재사용성이 뛰어난 기능을 묶어서 가져다 쓰기 위해
+```javascript
+    // libs/math.js
+    export function sum(x,y) {
+        return x + y;
+    }
+    
+    export var pi = 3.141593;
+
+    // main.js
+    import {sum} from 'libs/math.js';
+    sum(1,2);
+```

@@ -16,24 +16,30 @@ import TodoInput from './components/TodoInput.vue'
 import TodoList from './components/TodoList.vue'
 import TodoFooter from './components/TodoFooter.vue'
 
+/**
+ * 향상된 객체 리터럴
+ * - 객체의 속성을 메서드로 사용할 때 function 예약어 생략 가능
+ * - addOneItem : function(todoItem) { ...} => addOneItem(todoItem) 과 같은 의미
+ */
+
 export default {
-  data: function() {
+  data() {
     return {
       todoItems: []
     }
   },
   methods: {
-    addOneItem: function(todoItem) {
+    addOneItem(todoItem) {
       // 저장하는 로직
       const obj = {completed : false, item: todoItem};
       localStorage.setItem(todoItem, JSON.stringify(obj)) // 개발자도구 > 애플리케이션 > 로컬스토리지
       this.todoItems.push(obj);
     },
-    removeOneItem: function(todoItem, index) {
+    removeOneItem(todoItem, index) {
       localStorage.removeItem(todoItem.item);
       this.todoItems.splice(index, 1);
     },
-    toggleOneItem: function(todoItem, index) {
+    toggleOneItem(todoItem, index) {
       this.todoItems[index].completed = !this.todoItems[index].completed; 
       // todoItem.completed = !todoItem.completed; 안티패턴
       /*
@@ -45,12 +51,12 @@ export default {
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     },
-    clearAllItems: function() {
+    clearAllItems() {
       localStorage.clear();
       this.todoItems = [];
     },
   },
-  created: function() {
+  created() {
     if (localStorage.length > 0) {
         for (let i = 0; i < localStorage.length; i++) {
             if (localStorage.key(i) !== 'loglevel:webpack-dev-server') { // 불필요한 값 제외

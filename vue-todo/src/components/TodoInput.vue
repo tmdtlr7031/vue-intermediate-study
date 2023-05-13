@@ -22,14 +22,14 @@
 import Modal from './common/AlertModal.vue'
 
 export default {
-    data: function() {
+    data() {
         return {
             newTodoItem : "",
             showModal: false
         }
     },
     methods: {
-        addTodo : function() {
+        addTodo () {
             if (this.newTodoItem !== '') { // 빈 값 입력 제외
                 this.$emit('addTodoItem', this.newTodoItem);
                 this.clearInput();
@@ -37,7 +37,7 @@ export default {
                 this.showModal = !this.showModal;
             }
         },
-        clearInput: function() {
+        clearInput() {
             this.newTodoItem = '';
         }
     },

@@ -65,11 +65,16 @@ export default {
         }
     }
   },
+  /**
+   * 향상된 객체리터럴 2
+   * - 객체의 속성명과 값 명이 동일한 경우 축약 가능
+   * - 'TodoHeader' : TodoHeader => TodoHeader
+   */
   components: {
-    'TodoHeader' : TodoHeader,
-    'TodoInput' : TodoInput,
-    'TodoList' : TodoList,
-    'TodoFooter' : TodoFooter,
+    TodoHeader,
+    TodoInput,
+    TodoList,
+    TodoFooter,
   }
 }
 </script>

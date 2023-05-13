@@ -29,7 +29,7 @@ export default {
         }
     },
     methods: {
-        addTodo () {
+        addTodo() {
             if (this.newTodoItem !== '') { // 빈 값 입력 제외
                 this.$emit('addTodoItem', this.newTodoItem);
                 this.clearInput();
@@ -42,7 +42,7 @@ export default {
         }
     },
     components: {
-        Modal: Modal
+        Modal
     }
 }
 </script>

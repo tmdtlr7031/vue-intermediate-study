@@ -25,7 +25,7 @@ export default {
   methods: {
     addOneItem: function(todoItem) {
       // 저장하는 로직
-      let obj = {completed : false, item: todoItem};
+      const obj = {completed : false, item: todoItem};
       localStorage.setItem(todoItem, JSON.stringify(obj)) // 개발자도구 > 애플리케이션 > 로컬스토리지
       this.todoItems.push(obj);
     },

@@ -21,3 +21,11 @@
 >> mutations : state값을 변경하는 이벤트 로직, 메서드 ```methods````
 >> action : 비동기 처리 로직을 선언하는 메서드 ```async methods````
 
+- state와 data 구분은 언제?
+>> https://www.inflearn.com/questions/82002/state%EC%A7%88%EB%AC%B8%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4
+
+
+#### getters vs mutations
+- getters는 값을 접근할 때 mutations는 값을 변경할 때 사용
+- mutations는 state 값을 변경할 수 있는 **유일한 방법**이자 메서드며 ```commit()``` 으로 동작시킨다
+

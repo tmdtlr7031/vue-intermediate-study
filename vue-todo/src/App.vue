@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
+    <TodoInput></TodoInput>
     <TodoList v-bind:propsdata="todoItems" 
         v-on:removeItem="removeOneItem" 
         v-on:toggleItem="toggleOneItem">
@@ -29,12 +29,6 @@ export default {
     }
   },
   methods: {
-    addOneItem(todoItem) {
-      // 저장하는 로직
-      const obj = {completed : false, item: todoItem};
-      localStorage.setItem(todoItem, JSON.stringify(obj)) // 개발자도구 > 애플리케이션 > 로컬스토리지
-      this.todoItems.push(obj);
-    },
     removeOneItem(todoItem, index) {
       localStorage.removeItem(todoItem.item);
       this.todoItems.splice(index, 1);
@@ -55,15 +49,6 @@ export default {
       localStorage.clear();
       this.todoItems = [];
     },
-  },
-  created() {
-    if (localStorage.length > 0) {
-        for (let i = 0; i < localStorage.length; i++) {
-            if (localStorage.key(i) !== 'loglevel:webpack-dev-server') { // 불필요한 값 제외
-                this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-            }
-        }
-    }
   },
   /**
    * 향상된 객체리터럴 2

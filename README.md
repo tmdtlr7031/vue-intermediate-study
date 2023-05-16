@@ -6,3 +6,4 @@
 - vue-todo : 섹션 4까지 진행
 - es6 : 섹션 10까지 진행
 - vuex : vuex 섹션 12부터 진행
+- vuex-helper : vuex 섹션 13부터 진행

@@ -29,3 +29,11 @@
 - getters는 값을 접근할 때 mutations는 값을 변경할 때 사용
 - mutations는 state 값을 변경할 수 있는 **유일한 방법**이자 메서드며 ```commit()``` 으로 동작시킨다
 
+#### actions
+- 비동기 처리 로직을 담당하는 mutations
+- ```context```는 actions의 인자값으로 mutations의 ```state```처럼 파라미터를 받을 수 있음. context를 통해 store 메서드, 속성 접근
+- **actions에서는 바로 state를 변경할 수 없다.**
+- 만약 단순히 비동기로 API를 호출하는 용도면 따로 js 파일 만들어서 app.vue에 import 해서 써도 됨
+> https://www.inflearn.com/questions/476775/%EC%A7%88%EB%AC%B8%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4
+- ```.dispatch()```를 통해 actions 호출
+

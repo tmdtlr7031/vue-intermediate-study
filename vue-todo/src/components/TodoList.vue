@@ -2,7 +2,7 @@
   <div>
     <!-- name 은 하단의 css 클래스 transition class 와 연관-->
     <transition-group name="list" tag="ul">
-        <li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow">
+        <li v-for="(todoItem, index) in this.storedTodoItems" v-bind:key="todoItem.item" class="shadow">
             <span v-on:click="toggleComplete(todoItem, index)">
                 <i class="checkBtn fa-solid fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}"></i>
             </span>
@@ -17,6 +17,9 @@
 </template>
 
 <script>
+
+import {mapGetters} from 'vuex'
+
 export default {
     methods: {
         removeTodo(todoItem, index) {
@@ -25,6 +28,9 @@ export default {
         toggleComplete(todoItem, index) {
             this.$store.commit('toggleOneItem', {todoItem, index});
         }
+    },
+    computed : {
+        ...mapGetters(['storedTodoItems'])
     }
 }
 </script>

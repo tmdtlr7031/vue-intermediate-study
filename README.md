@@ -6,34 +6,65 @@
 - vue-todo : 섹션 4까지 진행
 - es6 : 섹션 10까지 진행
 - vuex : vuex 섹션 12부터 진행
+- vuex-helper : vuex 섹션 13부터 진행
 
-### Vuex
-- 설치 : npm i vuex@3.6.2 --save
-- import 시 중괄호 여부
- ```javascript
-    // 중괄호 필요 여부는 export에 default를 쓰느냐의 차이
-    import { store } from './store/store'
- ```
+### Vuex Helper
+- Store에 있는 4가지 속성들을 간편하게 코딩하는 방법
+> - state -> mapState
+> - getters -> mapGetters
+> - mutation -> mapMutations
+> - actions -> mapActions
 
-- Vuex 기술요소
-> - state : 여러 컴포넌트에 공유되는 데이터 ```data```
-> - getters : 연산된 state 값을 접근하는 속성 ```computed```
-> - mutations : state값을 변경하는 이벤트 로직, 메서드 ```methods```
-> - action : 비동기 처리 로직을 선언하는 메서드 ```async methods```
+- 사용법
+```javascript
+   // App.vue
+   // 모듈화된 파일에서 변수나, 함수 등의 단일 기능을 꺼내오는 경우에는 { }를 붙여야 합니다.
+   // https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/import
+   import {mapState} from 'vuex'
+   import {mapGetters} from 'vuex'
+   import {mapMutations} from 'vuex'
+   import {mapActions} from 'vuex'
 
-- state와 data 구분은 언제?
-> https://www.inflearn.com/questions/82002/state%EC%A7%88%EB%AC%B8%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4
+   export default {
+      computed: {...mapState(['num']), ...mapGetters(['countedNum'])},
+      methods: {...mapMutations(['clickBtn']), ...mapActions(['asyncClickBtn'])}
+   }
+```
 
+- 꼭 spread operator 다음에 [] 만 사용하나?
+> getters의 네이밍과 일치하는 경우엔 [''] 형식, 만약 TodoList.vue의 this.storedTodoItems 대신 this.items 처럼 네이밍이 다르면 ```...mapGetters({items: 'storedTodoItems'})``` 사용
+```javascript
+   // TodoList.vue
+   <transition-group name="list" tag="ul">
+        <li v-for="(todoItem, index) in this.storedTodoItems" v-bind:key="todoItem.item" class="shadow"> 생략.. </li>
 
-#### getters vs mutations
-- getters는 값을 접근할 때 mutations는 값을 변경할 때 사용
-- mutations는 state 값을 변경할 수 있는 **유일한 방법**이자 메서드며 ```commit()``` 으로 동작시킨다
+   export default {
+    computed : {
+        ...mapGetters(['storedTodoItems'])
+    }
 
-#### actions
-- 비동기 처리 로직을 담당하는 mutations
-- ```context```는 actions의 인자값으로 mutations의 ```state```처럼 파라미터를 받을 수 있음. context를 통해 store 메서드, 속성 접근
-- **actions에서는 바로 state를 변경할 수 없다.**
-- 만약 단순히 비동기로 API를 호출하는 용도면 따로 js 파일 만들어서 app.vue에 import 해서 써도 됨
-> https://www.inflearn.com/questions/476775/%EC%A7%88%EB%AC%B8%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4
-- ```.dispatch()```를 통해 actions 호출
+    // store.js
+    getters: {
+        storedTodoItems(state) {
+            return state.todoItems;
+        }
+    },
+   }
+```
 
+- 헬퍼의 유연한 문법
+- - Vuex에 선언한 속성을 그대로 컴포넌트에 연결하는 문법
+```javascript
+    // 배열 리터럴
+    ...mapMutations([
+        'clickBtn', // clickBtn:'clickBtn' 
+        'addNumber' // addNumber(인자) -> 따로 인자를 안적어줘도 같이 넘어간다.
+    ])
+```
+- - Vuex에 선언한 속성을 컴포넌트의 특정 메서드에다가 연결하는 문법
+```javascript
+    // 객체 리터럴
+    ...mapMutations({
+        popupMsg : 'clickBtn' // 컴포넌트 메서드명 : store의 mutations 명
+    })
+```

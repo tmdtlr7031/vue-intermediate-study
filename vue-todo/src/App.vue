@@ -2,11 +2,8 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput></TodoInput>
-    <TodoList v-bind:propsdata="todoItems" 
-        v-on:removeItem="removeOneItem" 
-        v-on:toggleItem="toggleOneItem">
-    </TodoList>
-    <TodoFooter v-on:clearAll="clearAllItems"></TodoFooter>
+    <TodoList></TodoList>
+    <TodoFooter></TodoFooter>
   </div>
 </template>
 
@@ -23,33 +20,6 @@ import TodoFooter from './components/TodoFooter.vue'
  */
 
 export default {
-  data() {
-    return {
-      todoItems: []
-    }
-  },
-  methods: {
-    removeOneItem(todoItem, index) {
-      localStorage.removeItem(todoItem.item);
-      this.todoItems.splice(index, 1);
-    },
-    toggleOneItem(todoItem, index) {
-      this.todoItems[index].completed = !this.todoItems[index].completed; 
-      // todoItem.completed = !todoItem.completed; 안티패턴
-      /*
-        이유
-        todoItems -> propsdata로 내림 -> TodoList.vue에서 for문에서 받아서 todoItem으로 이벤트 발생(다시 위로 올라감) -> 올라온 todoItem을 수정하는건 좋지않다고함
-      */
-
-      // localStorage는 update가 없어서 삭제 후 추가
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-    },
-    clearAllItems() {
-      localStorage.clear();
-      this.todoItems = [];
-    },
-  },
   /**
    * 향상된 객체리터럴 2
    * - 객체의 속성명과 값 명이 동일한 경우 축약 가능

@@ -7,7 +7,7 @@
 - es6 : 섹션 10까지 진행
 - vuex : vuex 섹션 12부터 진행
 - vuex-helper : vuex 섹션 13부터 진행
-- vuex-modules : vuex 섹션 14
+- vuex-modules : vuex 섹션 14 - 스토어 속성 모듈화 방법
 
 ### 프로젝트 구조화와 모듈화 방법 1
 - ES6의 import & export 이용한 속성별 모듈화
